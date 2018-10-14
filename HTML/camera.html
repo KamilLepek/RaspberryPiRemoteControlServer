@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Raspberry PI remote control</title>
+    <link rel="stylesheet" href='../static/css/style.css'/>
+  </head>
+  <body>
+    <div id="content">
+        <button id="start" onclick="startStreaming()">Start</button>
+    </div>
+  <script>
+	function startStreaming() {
+        	document.getElementById("start").style.visibility = 'hidden'
+        	var div = document.createElement("div")
+        	div.innerHTML = "<h1>Video stream</h1>"
+        	div.innerHTML += '<h3><img src="{{ url_for('video_stream') }}" width="50%"></h3>'
+        	div.innerHTML += '<p>@Kamil Łepek 2018</p>'
+        	document.getElementById("content").appendChild(div)
+	}
+  </script>
+  </body>
+</html>
