@@ -5,17 +5,46 @@
   </head>
   <body>
     <div id="content">
-        <button id="start" onclick="startStreaming()">Start</button>
+	<h1>Video stream</h1>       
+	<h3><img src="{{ url_for('video_stream') }}" width="50%"></h3>
+	<p>@Kamil Łepek 2018</p>
     </div>
-  <script>
-	function startStreaming() {
-        	document.getElementById("start").style.visibility = 'hidden'
-        	var div = document.createElement("div")
-        	div.innerHTML = "<h1>Video stream</h1>"
-        	div.innerHTML += '<h3><img src="{{ url_for('video_stream') }}" width="50%"></h3>'
-        	div.innerHTML += '<p>@Kamil Łepek 2018</p>'
-        	document.getElementById("content").appendChild(div)
+  <script type="text/javascript">
+	function keydown(e)
+	{	
+		var xhr = new XMLHttpRequest()
+                xhr.open("POST", '/move', true)
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+		console.log("xd")
+		switch(e.keyCode) 
+		{
+    			case 87:
+        			xhr.send("param=forward")
+        			break;
+    			case 83:
+        			xhr.send("param=backward")
+       				break;
+			case 65:
+				xhr.send("param=left")
+				break;
+			case 68:
+				xhr.send("param=right")
+				break;
+    			default:
+		}
 	}
+
+	function keyup()
+	{
+		var xhr = new XMLHttpRequest()
+		xhr.open("POST", '/stop', true)
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+		xhr.send()
+	}
+
+	document.addEventListener("keydown", keydown, false)
+        document.addEventListener("keyup", keyup, false)
+
   </script>
   </body>
 </html>
